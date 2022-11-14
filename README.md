@@ -1,66 +1,114 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Chpter Implementation Laravel Sample Project
 
-## About Laravel
+## Configuration
+Install chpter-laravel-sdk via composer
+```cmd
+composer require kiplingkelvin/chpter-laravel-sdk
+```
+   
+Run vendor:publish command inside your laravel project
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+```bash
+php artisan vendor:publish --provider="KiplingKelvin\ChpterLaravelSdk\ChpterServiceProvider"
+```
+After publishing you will find config/chpter.php config file. You can now adjust the configurations appropriately. Additionally, add the configurations to your env for security purposes.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Add the following files to your .env
+```env
+CLIENT_DOMAIN=
+CHPTER_TOKEN=
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+eg.
 
-## Learning Laravel
+CLIENT_DOMAIN=chpter.co
+CHPTER_TOKEN=chpter_pk_2b4037c1c8
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Usage
+## Payments
+### Mpesa Payment with STK Push 
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```php
+        $chpter= new \KiplingKelvin\ChpterLaravelSdk\Chpter();
 
-## Laravel Sponsors
+        $customer = array( 
+            "payment_method"=> "MPesa",
+            "full_name"=> "John Doe",
+            "location"=> "Nairobi",
+            "phone_number"=> "254700123123",
+            "email"=> "johndoe@mail.com"  );
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+        $products = array(  array( 
+                "product_id"=> "08",
+                "product_name"=> "HoodEez",
+                "quantity"=> "1",
+                "unit_price"=> "1" ));
 
-### Premium Partners
+        $amount = array( 
+                "delivery_fee"=> "0",
+                "discount_fee"=> "0",
+                "total"=> "1",
+                "currency"=> "kes");
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+        $callback_details = array( 
+                "transaction_reference"=>  "123456789123",
+                "callback_url"=>  "https://df02-197-232-140-206.in.ngrok.io/api/chpter_mpesa_payment_callback_url" );
 
-## Contributing
+        $response = $chpter->mpesaPayment($customer, $products, $amount, $callback_details);
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+        //Response Is in json
+        return $response;
+```
 
-## Code of Conduct
+### Card Payment
+```php
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+        $chpter= new \KiplingKelvin\ChpterLaravelSdk\Chpter();
 
-## Security Vulnerabilities
+        $customer = array( 
+            "payment_method"=> "Card",
+            "full_name"=> "John Doe",
+            "location"=> "Nairobi",
+            "phone_number"=> "254706347307",
+            "email"=> "johndoe@mail.com"  );
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+        $products = array(  array( 
+                "product_id"=> "08",
+                "product_name"=> "HoodEez",
+                "quantity"=> "1",
+                "unit_price"=> "1" ));
 
-## License
+        $amount = array( 
+                "delivery_fee"=> "0",
+                "discount_fee"=> "0",
+                "total"=> "1",
+                "currency"=> "kes");
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+        $card_details = array( 
+            "card_number"=> "4545454545454545",
+            "expiry_month"=> "08",
+            "expiry_year"=> "2024",
+            "cvc"=> "123");
+
+        $callback_details = array( 
+                "transaction_reference"=>  "123456789123",
+                "callback_url"=>  "https://df02-197-232-140-206.in.ngrok.io/api/chpter_mpesa_payment_callback_url" );
+
+        
+        Log::info('********Starting Card Api Request**********');
+        $response = $chpter->cardPayment($customer, $products, $amount, $card_details, $callback_details);
+
+        //The response is in json
+        Log::alert('Chpter Card API Response');
+        return $response;
+
+```
+## Author
+
+[@kiplingkelvin](https://www.github.com/kiplingkelvin)
+
+
+
