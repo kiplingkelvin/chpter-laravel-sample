@@ -22,5 +22,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('chpter_mpesa_payment', 'App\Http\Controllers\PaymentsController@mpesaPayment');
 Route::post('mpesa_payment_callback_url', 'App\Http\Controllers\PaymentsController@mpesaPaymentCallback');
 
-Route::get('chpter_card_payment', 'App\Http\Controllers\PaymentsController@cardPayment');
-Route::post('card_payment_callback_url', 'App\Http\Controllers\PaymentsController@cardPaymentCallback');
+Route::get('token-renewal', 'App\Http\Controllers\AccountsController@accountsTokenRenewal');
