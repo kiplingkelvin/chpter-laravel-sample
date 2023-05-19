@@ -976,16 +976,16 @@
         },
         {
             "name": "kiplingkelvin/chpter-laravel-sdk",
-            "version": "v1.0.2",
+            "version": "v1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kiplingkelvin/ChpterLaravelSdk.git",
-                "reference": "8b787043661c6ffa72b99758100d9c1f79d4ed8b"
+                "reference": "baa47af41643f756fdf63565c04c991801afa831"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kiplingkelvin/ChpterLaravelSdk/zipball/8b787043661c6ffa72b99758100d9c1f79d4ed8b",
-                "reference": "8b787043661c6ffa72b99758100d9c1f79d4ed8b",
+                "url": "https://api.github.com/repos/kiplingkelvin/ChpterLaravelSdk/zipball/baa47af41643f756fdf63565c04c991801afa831",
+                "reference": "baa47af41643f756fdf63565c04c991801afa831",
                 "shasum": ""
             },
             "require": {
@@ -1025,9 +1025,9 @@
             "description": "chpter.co PHP SDK for easy Payments and Payouts Integration",
             "support": {
                 "issues": "https://github.com/kiplingkelvin/ChpterLaravelSdk/issues",
-                "source": "https://github.com/kiplingkelvin/ChpterLaravelSdk/tree/v1.0.2"
+                "source": "https://github.com/kiplingkelvin/ChpterLaravelSdk/tree/v1.0.3"
             },
-            "time": "2023-05-16T06:18:43+00:00"
+            "time": "2023-05-19T13:42:26+00:00"
         },
         {
             "name": "laravel/framework",

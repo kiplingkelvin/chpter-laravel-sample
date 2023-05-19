@@ -86,4 +86,44 @@ class PaymentsController extends Controller{
     }
 
 
+       /******* Mpesa Payment API **********/
+       public function redirectPayment(Request $request){
+
+        $chpter= new \KiplingKelvin\ChpterLaravelSdk\Chpter();
+
+        $customer = array( 
+            "full_name"=> "John Doe",
+            "location"=> "Nairobi",
+            "phone_number"=> "254706347307",
+            "email"=> "johndoe@mail.com"  );
+
+        $products = array(  array( 
+                "product_name"=> "HoodEez",
+                "quantity"=> "1",
+                "unit_price"=> "1" ));
+
+        $amount = array( 
+                 "order_id"=> "859",
+                "delivery_fee"=> 0,
+                "discount_fee"=> 0,
+                "total"=> 500,
+                "currency"=> "kes");
+
+        $callback_details = array( 
+                "success_url" => "https://www.url.com",
+                "failed_url" => "https://www.url.com",
+                "callback_url" => "https://yourcallback.com/url"
+        );
+
+        
+        Log::info('********Starting Redirect Api Request**********');
+        $response = $chpter->hostedRedirectPayment($customer, $amount, $callback_details);
+
+        //The response is in json
+        Log::alert('Chpter Redirect API Response');
+        return $response;
+
+    }
+
+
 }
