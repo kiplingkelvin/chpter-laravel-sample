@@ -29,39 +29,12 @@ CHPTER_TOKEN=chpter_pk_2b4037c1c8
 
 ## Usage
 ## Payments
-### Mpesa Payment with STK Push 
+Mpesa Payment with STK Push 
+Redirect Payment (Hosted Sessions) 
 
-```php
-        $chpter= new \KiplingKelvin\ChpterLaravelSdk\Chpter();
-
-        $customer = array( 
-            "payment_method"=> "MPesa",
-            "full_name"=> "John Doe",
-            "location"=> "Nairobi",
-            "phone_number"=> "254700123123",
-            "email"=> "johndoe@mail.com"  );
-
-        $products = array(  array( 
-                "product_id"=> "08",
-                "product_name"=> "HoodEez",
-                "quantity"=> "1",
-                "unit_price"=> "1" ));
-
-        $amount = array( 
-                "delivery_fee"=> "0",
-                "discount_fee"=> "0",
-                "total"=> "1",
-                "currency"=> "kes");
-
-        $callback_details = array( 
-                "transaction_reference"=>  "123456789123",
-                "callback_url"=>  "https://df02-197-232-140-206.in.ngrok.io/api/chpter_mpesa_payment_callback_url" );
-
-        $response = $chpter->mpesaPayment($customer, $products, $amount, $callback_details);
-
-        //Response Is in json
-        return $response;
-```
+## Laravel Chpter Package
+Read more at
+[Laravel Package](https://packagist.org/packages/kiplingkelvin/chpter-laravel-sdk)
 
 ## Author
 
