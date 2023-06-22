@@ -29,7 +29,7 @@ CHPTER_TOKEN=chpter_pk_2b4037c1c8
 
 ## Usage
 ## Payments
-Mpesa Payment with STK Push 
+Mpesa Payment with STK Push &
 Redirect Payment (Hosted Sessions) 
 
 ## Laravel Chpter Package
